@@ -1,0 +1,62 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>REGISTER</ion-title>
+    </ion-navbar>
+
+</ion-header>
+<ion-content padding id="register">
+    <form [formGroup]="register">
+        <ion-list>
+            <ion-item id="password" style="padding:0px;">
+                <ion-label floating>NAME</ion-label>
+                <ion-input [formControl]="register.controls['name']" type="Email" #username></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>Mobile</ion-label>
+                <ion-input [formControl]="register.controls['mobile']" type="tel"></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>Password</ion-label>
+                <ion-input [formControl]="register.controls['password']" type="password" #password minlength="6"></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>Re-type Password</ion-label>
+                <ion-input [formControl]="register.controls['retypepassword']" type="password"></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>Name of the Shop</ion-label>
+                <ion-input [formControl]="register.controls['nameofshop']" type="text"></ion-input>
+            </ion-item>
+            <div class="spacer" style="width: 50px; height: 20px;"></div>
+            <ion-item style="padding:0px; width:370px">
+                <ion-label>Shop category</ion-label>
+                <ion-select id="category" [formControl]="register.controls['category']" multiple="false">
+                    <ion-option>Kirana</ion-option>
+                    <ion-option>Fancy</ion-option>
+                    <ion-option>Medical</ion-option>
+                    <ion-option>Floral</ion-option>
+                    <ion-option>None</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>LATITUDE</ion-label>
+                <ion-input [formControl]="register.controls['latitude']" type="text" value="{{this.latitude}}" readonly></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>LONGITUDE</ion-label>
+                <ion-input [formControl]="register.controls['longitude']" type="text" value="{{this.longitude}}" readonly></ion-input>
+            </ion-item>
+
+            <!--
+        %<p> Location:{{ location?.coords.latitude}}/ {{ location?.coords.longitude }} </p>
+-->
+        </ion-list>
+    </form>
+    <div padding>
+        <button block ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="registerUser()">Sign Up</button>
+    </div>
+    <div padding>
+        <button block ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="saveEntry()">Sign</button>
+    </div>
+</ion-content>

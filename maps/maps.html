@@ -1,0 +1,43 @@
+<!--
+  Generated template for the MapsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header color="vamsi">
+
+    <ion-navbar color="vamsi">
+        <ion-title>TRACING..</ion-title>
+        <ion-buttons end id="BUTON">
+            <button ion-button large (click)="mapUser()" id="BUTON">
+              <ion-icon large name="locate" color="white"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <!--
+    <ion-item id="password" style="position: relative; padding:0px;">
+        <ion-label floating>LOCATION</ion-label>
+        <ion-input type="text" value="{{ location?.coords.latitude}} {{ location?.coords.longitude }}" readonly></ion-input>
+    </ion-item>
+
+    <div padding>
+        <button outline ion-button id="vamsi" color="light" style=" z-index:2; padding:0px; width: 100%;" [disabled]="disabled" small (click)="mapUser()">LOCATE ME</button>
+    </div>
+
+-->
+    <agm-map [disableDefaultUI]="true" [latitude]="location?.coords.latitude" [streetViewControl]="true" [longitude]="location?.coords.longitude" [mapTypeId]="'roadmap'" [zoom]="15">
+        <agm-marker [label]="options" [latitude]="location?.coords.latitude" [longitude]="location?.coords.longitude" [markerClickable]="true"></agm-marker>
+    </agm-map>
+
+    <div #map id=map style="height:100%;"></div>
+
+
+    <div padding>
+        <button block ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="saveEntr()">Sign</button>
+    </div>
+</ion-content>

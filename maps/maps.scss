@@ -1,0 +1,21 @@
+page-maps {
+    #password {
+        background: color($colors, white);
+        width: 95%;
+    }
+    #BUTON {
+        background: color($colors, vamsi);
+    }
+    agm-map {
+        height: 400px;
+        width: auto;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        right: 0;
+    }
+    map {
+        height: 400px;
+    }
+}

@@ -1,0 +1,18 @@
+<ion-header>
+
+    <ion-navbar color="vamsi">
+        <ion-title>HEADER</ion-title>
+        <span style="color:rgb(255, 255, 255);padding-left:11px;font-weight:bold;font-size:10px;">UID:{{this.record}}</span>
+        <ion-buttons end id="BUTON">
+            <button (click)="Logout()" id="BUTON">
+              <ion-icon name="log-out" color="white"></ion-icon>
+          </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+<ion-tabs tabsPlacement="top" color="vamsi">
+    <ion-tab [root]="homeRoot" [rootParams]="record" tabTitle="Register-items" tabIcon="add"></ion-tab>
+    <ion-tab [root]="yourItemsRoot" tabTitle="Your-items" tabIcon="cart"></ion-tab>
+    <ion-tab [root]="editHistoryRoot" tabTitle="Edit-items" tabIcon="basket"></ion-tab>
+</ion-tabs>

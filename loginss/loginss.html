@@ -1,0 +1,61 @@
+<!--
+  Generated template for the LoginssPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header color="vamsi">
+
+    <ion-navbar color="vamsi">
+        <ion-title>ITEM SHELF</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<!--
+<ion-content padding>
+<ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+        {{item.EMAIL}}
+</ion-item>
+</ion-list>
+</ion-content>
+-->
+
+<ion-content style="background-color:wheat">
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+
+    <ion-item *ngFor="let itemy of itemsk;let i=index" style="padding-top:0px;padding-bottom:-100px;size: 0px">
+        <!--<ion-checkbox color="vamsi" value="itemy.item" ng-true-Value=”’I\starving’” [(ngModel)]="itemy.item" (click)="logins(itemy)" style="padding-left:0px;"></ion-checkbox>
+        <ion-card>
+            <ion-label style="padding-left:0px;">{{itemy.item}}/{{i}}<br>
+                <span style="font-size:10px;">In Range of a 'km' Distance from your Location</span>
+            </ion-label>
+        </ion-card>
+    </ion-item>
+-->
+
+        <ion-item style="background-color:wheat;">
+            <ion-card>
+                <ion-row>
+                    <ion-col style="background-color:white">
+                        <ion-item style="background-color:#FFA500;color: white">
+                            <div style="font-weight: bold">{{itemy.item}}</div>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col>
+                        <button ion-button icon-left outline [color]="ionicNamedColor" (click)="hello(itemy,i)">
+                        <ion-icon name="clipboard"></ion-icon>
+                        <div>Register</div>
+                      </button>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </ion-item>
+
+    </ion-item>
+
+
+</ion-content>

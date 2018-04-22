@@ -1,0 +1,27 @@
+<!--
+  Generated template for the RetloginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<div id="custom-overlay" [style.display]="splash ? 'flex':'none'">
+    <div class="flb">
+        <div class="Aligner-item Aligner-item--top"></div>
+        <img src="assets/imgs/LOGO.png">
+        <div class="Aligner-item Aligner-item--bottom"></div>
+    </div>
+</div>
+<ion-content padding id="login" class=" manual-remove-top-padding">
+    <div class="spacer" style="width: 300px; height: 1px;"></div>
+    <div style="margin-left: -20px; width: calc(100% + 40px);">
+        <img src="assets/imgs/SHOOP.jpg" class="logo" style="display: block; width: 100%; margin-left: auto; margin-right: auto; margin-top: -40px;" />
+    </div>
+
+    <ion-content padding>
+        <div padding>
+            <button block ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="PLogin()">PURCHASER</button>
+            <div class="spacer" style="width: 50px; height: 10px;"></div>
+            <button block ion-button color="vamsi" medium (click)="Login()">RETAILER</button>
+        </div>
+    </ion-content>
