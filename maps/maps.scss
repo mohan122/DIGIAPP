@@ -7,13 +7,18 @@ page-maps {
         background: color($colors, vamsi);
     }
     agm-map {
-        height: 400px;
-        width: auto;
+        height: 100%;
+        width: 100%;
         position: absolute;
-        left: 0;
-        bottom: 0;
-        top: 0;
-        right: 0;
+        left: 0px;
+        bottom: 0px;
+        top: 0px;
+        right: 0px;
+    }
+    #hello {
+        position: relative;
+        bottom: -370px;
+        padding: 100px;
     }
     map {
         height: 400px;

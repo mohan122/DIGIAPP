@@ -63,7 +63,7 @@ public isPiecesSelected: boolean;
   load() : void
    {
       this.http
-      .get('http://localhost/vamsi/itrv.php')
+      .get('http://192.168.0.8/vamsi/itrv.php')
       .subscribe((data : any) =>
       {
          console.dir(data);
@@ -79,7 +79,7 @@ public isPiecesSelected: boolean;
    load1() : void
    {
       this.http
-      .get('http://localhost/vamsi/itemretrivek.php')
+      .get('http://192.168.0.8/vamsi/itemretrivek.php')
       .subscribe((data : any) =>
       {
          console.dir(data);

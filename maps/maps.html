@@ -30,14 +30,15 @@
     </div>
 
 -->
+
     <agm-map [disableDefaultUI]="true" [latitude]="location?.coords.latitude" [streetViewControl]="true" [longitude]="location?.coords.longitude" [mapTypeId]="'roadmap'" [zoom]="15">
         <agm-marker [label]="options" [latitude]="location?.coords.latitude" [longitude]="location?.coords.longitude" [markerClickable]="true"></agm-marker>
     </agm-map>
 
-    <div #map id=map style="height:100%;"></div>
-
 
     <div padding>
-        <button block ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="saveEntr()">Sign</button>
+        <button block ion-button color="vamsi" id="hello" style="padding:10px; width: 100%;" medium (click)="saveEntr()">Sign</button>
     </div>
+
+
 </ion-content>

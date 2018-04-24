@@ -28,8 +28,8 @@ export class LoginssPage {
   
   public ionicNamedColor: string = 'primary';
   longitude:any;
-  private baseURI : string  = "http://localhost/vamsi/tesss.php";
-  private baseURIp : string  = "http://localhost/vamsi/productdis.php";
+  private baseURI : string  = "http://192.168.0.8/vamsi/tesss.php";
+  private baseURIp : string  = "http://192.168.0.8/vamsi/productdis.php";
   constructor(public navCtrl: NavController,private alertctrl:AlertController,private geolocation: Geolocation,public platform:Platform, public navParams: NavParams,public http   : HttpClient) {
     
   }
@@ -38,7 +38,7 @@ export class LoginssPage {
   loads() : void
   {
      this.http
-     .get('http://localhost/vamsi/corda.php')
+     .get('http://192.168.0.8/vamsi/corda.php')
      .subscribe((data : any) =>
      {
         console.dir(data);
@@ -128,7 +128,7 @@ export class LoginssPage {
 
   help():void{
     this.http
-    .get('http://localhost/vamsi/productdis.php')
+    .get('http://192.168.0.8/vamsi/productdis.php')
     .subscribe((datak : any) =>
     {
        console.dir(datak);
@@ -168,7 +168,7 @@ export class LoginssPage {
           // If the request was successful notify the user
        
           console.log(`Congratulations the ${dat} was successfully added`);
-          this.help();
+          
          
        },
        (error : any) =>
