@@ -1,0 +1,62 @@
+<!--
+  Generated template for the PregisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header style="background-color:#FFA500;">
+
+    <ion-navbar color="vamsi">
+        <ion-title style="font-weight:900px;">REGISTER</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+
+    <form [formGroup]="pregister">
+        <ion-list>
+            <ion-item id="password" style="padding:0px;">
+                <ion-label floating>EMAIL</ion-label>
+                <ion-input [formControl]="pregister.controls['name']" type="Email"></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>Mobile</ion-label>
+                <ion-input [formControl]="pregister.controls['mobile']" type="tel"></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>Password</ion-label>
+                <ion-input [formControl]="pregister.controls['password']" type="password" minlength="6"></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>Re-type Password</ion-label>
+                <ion-input [formControl]="pregister.controls['retypepassword']" type="password"></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>Address</ion-label>
+                <ion-input [formControl]="pregister.controls['address']" type="text"></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>Street Name</ion-label>
+                <ion-input [formControl]="pregister.controls['streetname']" type="text"></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>City</ion-label>
+                <ion-input [formControl]="pregister.controls['city']" type="text"></ion-input>
+            </ion-item>
+            <ion-item id="password" style="position: relative; padding:0px;">
+                <ion-label floating>Pincode</ion-label>
+                <ion-input [formControl]="pregister.controls['pincode']" type="text"></ion-input>
+            </ion-item>
+        </ion-list>
+    </form>
+
+    <div padding>
+        <button block ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="registerUse()">Sign Up</button>
+    </div>
+
+
+
+</ion-content>
