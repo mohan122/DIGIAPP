@@ -58,7 +58,7 @@ Register() {
 }
 volt():void{
   this.http
-     .get('http://localhost/vamsi/Auth.php')
+     .get('http://localhost/vamsi/Authenti.php')
      .subscribe((data : any) =>
      {
         console.log(data);

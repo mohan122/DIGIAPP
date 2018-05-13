@@ -36,9 +36,10 @@ export class MapsPage {
   disabled:boolean;
   position:any;
   map: GoogleMap;
-  private baseURI : string  = "http://localhost/vamsi/corda.php";
+  private baseURI : string  = "http://localhost/vamsi/shops.php";
   latitude:any;
   longitude:any;
+  public itemsy : Array<any> = [];
   
   
  // map: GoogleMap;
@@ -136,16 +137,60 @@ this.geolocation.getCurrentPosition(options).then((location) => {
   this.latitude=location.coords.latitude;
   this.longitude=location.coords.longitude;
     this.disabled=true;
-   
+    this.saveEntry();
 }).catch((error) => {
   console.log('Error getting location', error);
 });
 });
   }
+  saveEntry() : void
+    {
+       let latitude:number=this.latitude,
+          longitude:number=this.longitude;
+  
+      
+          this.createEntry(latitude,longitude);
+    }
+    createEntry(latitude:number,longitude:number) : void
+  {
+     let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
+         options 	: any		= {"key":"create", "latitude":latitude,"longitude":longitude },
+         url       : any      	= this.baseURI ;
+
+     this.http.post(url, JSON.stringify(options), headers)
+     .subscribe((data : any) =>
+     {
+        // If the request was successful notify the user
+     
+        console.log(`Congratulations the ${latitude} was successfully added`);
+        this.loads();
+     },
+     (error : any) =>
+     {
+        console.log({error});
+        this.loads();
+     });
+  }
+  loads() : void
+  {
+     this.http
+     .get('http://192.168.0.8/vamsi/rshop.php')
+     .subscribe((data : any) =>
+     {
+        console.dir(data);
+       
+        this.itemsy = data;
+     },
+     (error : any) =>
+     {
+        console.dir(error);
+     });
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapsPage');
     //this.loadMap();
+    this.mapUser();
   }
 
 }

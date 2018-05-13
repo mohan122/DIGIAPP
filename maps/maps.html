@@ -18,7 +18,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
     <!--
     <ion-item id="password" style="position: relative; padding:0px;">
         <ion-label floating>LOCATION</ion-label>
@@ -35,9 +35,17 @@
         <agm-marker [label]="options" [latitude]="location?.coords.latitude" [longitude]="location?.coords.longitude" [markerClickable]="true"></agm-marker>
     </agm-map>
 
+    <ion-list no-lines style="padding-top: 220px">
 
-    <div padding>
-        <button block ion-button color="vamsi" id="hello" style="padding:10px; width: 100%;" medium (click)="saveEntr()">Sign</button>
+        <ion-item *ngFor="let itemy of itemsy;let i=index" style="border-bottom: 1px solid rgb(235, 150, 150);">
+            <ion-icon name="locate" color="vamsi" item-start></ion-icon>
+            {{ itemy.shopname }}
+
+        </ion-item>
+    </ion-list>
+
+    <div padding style="padding-top:relative;">
+        <button block ion-button color="vamsi" id="hello" vmedium (click)="saveEntr()">Register</button>
     </div>
 
 
