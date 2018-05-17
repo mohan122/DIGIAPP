@@ -55,7 +55,7 @@ export class RegisterPage {
      .subscribe((data : any) =>
      {
         // If the request was successful notify the user
-     
+        console.log(data);
         console.log(`Congratulations the ${name} was successfully added`);
      },
      (error : any) =>

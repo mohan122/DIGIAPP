@@ -190,7 +190,7 @@ this.geolocation.getCurrentPosition(options).then((location) => {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapsPage');
     //this.loadMap();
-    this.mapUser();
+    this.mapUser();  
   }
 
 }

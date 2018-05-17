@@ -21,21 +21,27 @@
     </ion-header>
     <div class="spacer" style="width: 50px; height: 0px;"></div>
     <ion-card-content>
-        <ion-list>
-            <ion-item id="password" style="padding:0px;">
-                <ion-label floating>Email/Mobile no.</ion-label>
-                <ion-input type="Email"></ion-input>
-            </ion-item>
-            <div class="spacer" style="width: 50px; height: 2px;"></div>
-            <ion-item id="password" style="position: relative; padding:0px;">
-                <ion-label floating>Password</ion-label>
-                <ion-input type="password"></ion-input>
-            </ion-item>
-        </ion-list>
+        <form [formGroup]="plogin">
+            <ion-list>
+                <ion-item id="password" style="padding:0px;">
+                    <ion-label floating>Email/Mobile no.</ion-label>
+                    <ion-input type="Email" [formControl]="plogin.controls['Email']"></ion-input>
+                </ion-item>
+                <div class="spacer" style="width: 50px; height: 2px;"></div>
+                <ion-item id="password" style="position: relative; padding:0px;">
+                    <ion-label floating>Password</ion-label>
+                    <ion-input type="password" [formControl]="plogin.controls['word']"></ion-input>
+                </ion-item>
+            </ion-list>
+        </form>
         <div padding>
             <button block ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="Map()">Sign In</button>
             <div class="spacer" style="width: 50px; height: 10px;"></div>
             <button block ion-button color="light" medium (click)="Register()">Register</button>
         </div>
     </ion-card-content>
+    <ion-item *ngFor="let itemy of itemsa;let i=index" style="border-bottom: 1px solid rgb(235, 150, 150)">
+        <ion-icon name="cart" color="vamsi" item-start></ion-icon>
+        {{ itemy.EMAIL+itemy.PASSWORD}}
+    </ion-item>
 </ion-content>

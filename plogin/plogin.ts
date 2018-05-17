@@ -1,3 +1,4 @@
+import { Map } from 'rxjs/util/Map';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PregisterPage } from '../pregister/pregister'; 
@@ -18,8 +19,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: 'plogin.html',
 })
 export class PloginPage {
-  private baseURI : string  = "http://localhost/vamsi/Auth.php";
+  private baseURI : string  = "http://localhost/vamsi/Authenti.php";
   public plogin:FormGroup;
+  EMAIL:any;
+  
+  key:any;
+  public itemsa:Array<any>=[];
   constructor(public navCtrl: NavController, public http: HttpClient,public formBuilder:FormBuilder, public navParams: NavParams) {
     this.plogin=this.formBuilder.group({ 
     Email:[''],
@@ -31,25 +36,35 @@ export class PloginPage {
   Map():void {
     let mailid          : string = this.plogin.controls["Email"].value,
         pass   : string   = this.plogin.controls["word"].value;
-        this.createEntry(mailid,pass);
+       this.createEntry(mailid,pass);
     
 }
 createEntry(mailid:string,pass:string){
   let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
-  options 	: any		= { "key" : "create", "ID" : mailid, "pass" : pass},
+  options 	: any		= {  "ID" : mailid,},
   url       : any      	= this.baseURI ;
 
 this.http.post(url, JSON.stringify(options), headers)
 .subscribe((data : any) =>
 {
- // If the request was successful notify the user
-
- console.log(`Congratulations the ${name} was successfully added`);
- this.volt();
+ 
+  console.log(data);
+  console.log(data[0].PASSWORD);
+     
+  this.itemsa=data;
+  
+  this.key=data.PASSWORD;
+  
+ if(data[0].PASSWORD=="kingmaker@1998")
+ {
+   this.navCtrl.setRoot(MapsPage);
+ }
+ 
+ //console.log(data);
 },
 (error : any) =>
 {
- console.log(error);
+ console.log({error});
  
 });
 }
@@ -62,8 +77,11 @@ volt():void{
      .subscribe((data : any) =>
      {
         console.log(data);
+       this.itemsa=data;
        
-       this.navCtrl.setRoot(MapsPage);
+       console.log(this.itemsa);
+       
+     
      },
      (error : any) =>
      {

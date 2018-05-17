@@ -9,6 +9,11 @@
     <ion-navbar color="vamsi">
         <ion-title>ITEM SHELF</ion-title>
     </ion-navbar>
+    <ion-toolbar color="teja">
+
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+
+    </ion-toolbar>
 
 </ion-header>
 
@@ -24,9 +29,7 @@
 -->
 
 <ion-content style="background-color:rgb(235, 150, 150)">
-    <div id=container style="background-color: rgb(235, 150, 150)">
-        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    </div>
+
 
     <!--
         <ion-item *ngFor="let itemy of itemsk;let i=index" style="padding-top:0px;size: 0px;background-color:white">
