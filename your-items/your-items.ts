@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 /**
  * Generated class for the YourItemsPage page.
@@ -20,8 +20,10 @@ export class YourItemsPage {
   public itemsa:Array<any>=[];
   public isKgsSelected: boolean;
 public isPiecesSelected: boolean;
+private baseURIp : string  = "http://192.168.0.8/vamsi/itrv.php";
 
   constructor(public navCtrl: NavController,private alertctrl:AlertController, public navParams: NavParams,public http   : HttpClient) {
+    console.log('Passed params', navParams.data);
   }
   Logout(){
     this.navCtrl.setRoot(LoginPage);
@@ -57,12 +59,34 @@ public isPiecesSelected: boolean;
 
   ionViewWillEnter() : void
   {
-     this.load();
+    let name:string=this.navParams.data;
+     this.load(name);
      this.load1();
   }
-  load() : void
+  load(name) : void
    {
-      this.http
+   
+       let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
+           options 	: any		= {"key":"create", "mail":name },
+           url       : any      	= this.baseURIp ;
+    
+       this.http.post(url, JSON.stringify(options), headers)
+       .subscribe((data : any) =>
+       {
+          // If the request was successful notify the user
+       
+          console.log(data);
+          this.items = data;
+        
+       },
+       (error : any) =>
+       {
+          console.log({error});
+       });
+    }
+    
+    
+     /* this.http
       .get('http://192.168.0.8/vamsi/itrv.php')
       .subscribe((data : any) =>
       {
@@ -73,8 +97,8 @@ public isPiecesSelected: boolean;
       {
          console.dir(error);
          this.alert('No Items Published from this Account');
-      });
-   }
+      });*/
+   
 
    load1() : void
    {

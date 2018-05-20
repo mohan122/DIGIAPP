@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams ,Platform} from 'ionic-angular';
+import { IonicPage, NavController, NavParams ,Platform,AlertController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule } from '@agm/core';
 import { variable } from '@angular/compiler/src/output/output_ast';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {GoogleMap,GoogleMaps,LatLng,CameraPosition,GoogleMapsEvent} from '@ionic-native/google-maps';
 import { LoginssPage } from '../loginss/loginss';
+import { PloginPage } from '../plogin/plogin';
 
 /*import {
   GoogleMaps,
@@ -36,20 +37,23 @@ export class MapsPage {
   disabled:boolean;
   position:any;
   map: GoogleMap;
-  private baseURI : string  = "http://localhost/vamsi/shops.php";
+  private baseURI : string  = "http://192.168.0.8/vamsi/shops.php";
   latitude:any;
   longitude:any;
   public itemsy : Array<any> = [];
+  record:any;
   
   
  // map: GoogleMap;
   
 
-  constructor(public navCtrl: NavController,public http: HttpClient, public googleMaps:GoogleMaps,public navParams: NavParams,private geolocation: Geolocation,public platform:Platform) {
+  constructor(public navCtrl: NavController,public http: HttpClient,private alertCtrl: AlertController, public googleMaps:GoogleMaps,public navParams: NavParams,private geolocation: Geolocation,public platform:Platform) {
     this.locatio=[{
        title:'V'
     }];
     var disabled = false;
+    this.record=navParams.get('emails')
+    console.log(this.record)
   }
   /*
   ngAfterViewInit(){
@@ -124,7 +128,7 @@ export class MapsPage {
   
 
 saveEntr(){
-  this.navCtrl.push(LoginssPage);
+  this.navCtrl.push(LoginssPage,{emails:this.record});
 }
 
 
@@ -161,9 +165,10 @@ this.geolocation.getCurrentPosition(options).then((location) => {
      .subscribe((data : any) =>
      {
         // If the request was successful notify the user
-     
+        console.log(data);
+        this.itemsy = data;
         console.log(`Congratulations the ${latitude} was successfully added`);
-        this.loads();
+        
      },
      (error : any) =>
      {
@@ -186,9 +191,34 @@ this.geolocation.getCurrentPosition(options).then((location) => {
         console.dir(error);
      });
   }
-
+Logout(){
+  let alert = this.alertCtrl.create({
+    title: 'CONFIRM LOGOUT',
+    message: 'Do you want to Logout',
+    buttons: [
+      {
+        text: 'stay',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+          this.navCtrl.setRoot(MapsPage);
+        }
+      },
+      {
+        text: 'Logout',
+        handler: () => {
+          console.log('Buy clicked');
+          this.navCtrl.setRoot(PloginPage);
+        }
+      }
+    ]
+  });
+  alert.present();
+  
+}
   ionViewDidLoad() {
     console.log('ionViewDidLoad MapsPage');
+    console.log(this.record);
     //this.loadMap();
     this.mapUser();  
   }

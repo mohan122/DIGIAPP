@@ -8,9 +8,15 @@
 
     <ion-navbar color="vamsi">
         <ion-title>TRACING..</ion-title>
+        <span style="color:rgb(255, 255, 255);padding-left:11px;font-weight:bold;font-size:10px;">UID:{{this.record}}</span>
         <ion-buttons end id="BUTON">
             <button ion-button large (click)="mapUser()" id="BUTON">
               <ion-icon large name="locate" color="white"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-buttons end id="BUTON">
+            <button (click)="Logout()" id="BUTON">
+              <ion-icon name="log-out" color="white"></ion-icon>
           </button>
         </ion-buttons>
     </ion-navbar>
@@ -35,11 +41,15 @@
         <agm-marker [label]="options" [latitude]="location?.coords.latitude" [longitude]="location?.coords.longitude" [markerClickable]="true"></agm-marker>
     </agm-map>
 
+    <!--
+    <iframe width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=78.45454931259157%2C17.446588577020446%2C78.47849607467653%2C17.458031256252337&amp;layer=mapnik"
+        style="border: 1px solid black"></iframe><br/><small><a href='https://www.openstreetmap.org/#map=16/'+location?.coords.latitude+'/'+location?.coords.longitude+'>View Larger Map</a></small>
+-->
     <ion-list no-lines style="padding-top: 220px">
 
         <ion-item *ngFor="let itemy of itemsy;let i=index" style="border-bottom: 1px solid rgb(235, 150, 150);">
             <ion-icon name="locate" color="vamsi" item-start></ion-icon>
-            {{ itemy.shopname }}
+            {{itemy.shopname}}
 
         </ion-item>
     </ion-list>

@@ -8,11 +8,10 @@
 
     <ion-navbar color="vamsi">
         <ion-title>ITEM SHELF</ion-title>
+        <span style="color:rgb(255, 255, 255);padding-left:11px;font-weight:bold;font-size:10px;">UID:{{this.records}}</span>
     </ion-navbar>
     <ion-toolbar color="teja">
-
         <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-
     </ion-toolbar>
 
 </ion-header>
@@ -71,5 +70,5 @@
             <button ion-button outline color="vamsi" style="color: rgb(235, 150, 150);" item-end (click)="hello(itemy,i)">Register</button>
         </ion-item>
     </ion-list>
-
+    <button ion-button block color="vamsi" (click)="mohan()">Navigate</button>
 </ion-content>

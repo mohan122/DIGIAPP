@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,Platform,AlertController } from 'io
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation';
+import { ShopitemPage } from '../shopitem/shopitem';
 
 /**
  * Generated class for the LoginssPage page.
@@ -25,32 +26,17 @@ export class LoginssPage {
   lappy:any;
   latitude:any;
   dats:any;
+  records:any;
   
   public ionicNamedColor: string = 'primary';
   longitude:any;
-  private baseURI : string  = "http://192.168.0.8/vamsi/tesss.php";
+  private baseURI : string  = "http://192.168.0.8/vamsi/tesa.php";
   private baseURIp : string  = "http://192.168.0.8/vamsi/productdis.php";
   constructor(public navCtrl: NavController,private alertctrl:AlertController,private geolocation: Geolocation,public platform:Platform, public navParams: NavParams,public http   : HttpClient) {
-    
+    this.records=navParams.get('emails')
+    console.log(this.records)
   }
 
-
-  loads() : void
-  {
-     this.http
-     .get('http://192.168.0.8/vamsi/corda.php')
-     .subscribe((data : any) =>
-     {
-        console.dir(data);
-       
-        this.itemsy = data;
-        this.initializeItems();
-     },
-     (error : any) =>
-     {
-        console.dir(error);
-     });
-  }
   initializeItems() {
     this.itemsk = this.itemsy;
     
@@ -114,10 +100,12 @@ export class LoginssPage {
      this.http.post(url, JSON.stringify(options), headers)
      .subscribe((data : any) =>
      {
-        // If the request was successful notify the user
-     
+       
+        console.log(data);
+        this.itemsy = data;
+        this.initializeItems();
         console.log(`Congratulations the ${latitude} was successfully added`);
-        this.loads();
+      
      },
      (error : any) =>
      {
@@ -126,23 +114,7 @@ export class LoginssPage {
   }
 
 
-  help():void{
-    this.http
-    .get('http://192.168.0.8/vamsi/productdis.php')
-    .subscribe((datak : any) =>
-    {
-       console.dir(datak);
-      
-       
-    },
-    (error : any) =>
-    {
-       console.dir(error);
-    });
-
-
-
-  }
+ 
   
   hello(itemy,i){
     this.ionicNamedColor = 'secondary';
@@ -151,15 +123,22 @@ export class LoginssPage {
     if(index > -1){
       this.dats=this.itemsk[index];
       let dat:string=this.dats.item;
-      this.registeritem(dat);
+      console.log(dat);
+      let latitudes:number=this.latitude,
+      longitudes:number=this.longitude;
+      let name:string=this.records;
+      console.log(latitudes);
+      this.registeritem(dat,latitudes,longitudes,name);
     }
     
     }
-    registeritem(dat:string) : void
+    registeritem(dat:string,latitudes:number,longitudes:number,name:string) : void
     {
-      console.log(dat);
+       console.log(dat);
+       console.log(latitudes);
+       console.log(longitudes);
        let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
-           options 	: any		= {"key":"create", "piece":dat},
+           options 	: any		= {"key":"create", "piece":dat,"latitude":latitudes,"longitude":longitudes,"mail":name},
            url       : any      	= this.baseURIp ;
   
        this.http.post(url, JSON.stringify(options), headers)
@@ -180,6 +159,9 @@ export class LoginssPage {
     this.mapUse();
     
     console.log('ionViewDidLoad LoginssPage');
+  }
+  mohan(){
+    this.navCtrl.push(ShopitemPage);
   }
 
 }

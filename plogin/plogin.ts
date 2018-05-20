@@ -1,6 +1,6 @@
 import { Map } from 'rxjs/util/Map';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { PregisterPage } from '../pregister/pregister'; 
 import { MapsPage} from '../maps/maps';
 import { FormBuilder,FormGroup} from '@angular/forms';
@@ -19,16 +19,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: 'plogin.html',
 })
 export class PloginPage {
-  private baseURI : string  = "http://localhost/vamsi/Authenti.php";
+  private baseURI : string  = "http://192.168.0.8/vamsi/Authenti.php";
   public plogin:FormGroup;
   EMAIL:any;
   
   key:any;
   public itemsa:Array<any>=[];
-  constructor(public navCtrl: NavController, public http: HttpClient,public formBuilder:FormBuilder, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,private alertctrl:AlertController, public http: HttpClient,public formBuilder:FormBuilder, public navParams: NavParams) {
     this.plogin=this.formBuilder.group({ 
     Email:[''],
     word:[''],
+  
     });
 
     
@@ -38,6 +39,14 @@ export class PloginPage {
         pass   : string   = this.plogin.controls["word"].value;
        this.createEntry(mailid,pass);
     
+}
+
+alert(message:string){
+  this.alertctrl.create({
+    title: 'Alert',
+    subTitle: message,
+    buttons: ['OK']
+  }).present();
 }
 createEntry(mailid:string,pass:string){
   let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -49,15 +58,19 @@ this.http.post(url, JSON.stringify(options), headers)
 {
  
   console.log(data);
-  console.log(data[0].PASSWORD);
-     
+  
   this.itemsa=data;
   
   this.key=data.PASSWORD;
   
- if(data[0].PASSWORD=="kingmaker@1998")
+ if(data[0].PASSWORD==this.plogin.controls["word"].value && data[0].PASSWORD!="")
  {
-   this.navCtrl.setRoot(MapsPage);
+   this.navCtrl.setRoot(MapsPage,{emails:mailid});
+   
+ }
+ else
+ {
+  this.alert('EMAIL OR PASSWORD IS INCORRECT');
  }
  
  //console.log(data);
@@ -65,7 +78,7 @@ this.http.post(url, JSON.stringify(options), headers)
 (error : any) =>
 {
  console.log({error});
- 
+ this.alert('EMAIL ID NOT REGISTERED');
 });
 }
 Register() {
@@ -73,7 +86,7 @@ Register() {
 }
 volt():void{
   this.http
-     .get('http://localhost/vamsi/Authenti.php')
+     .get('http://192.168.0.8/vamsi/Authenti.php')
      .subscribe((data : any) =>
      {
         console.log(data);
