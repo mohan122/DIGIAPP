@@ -20,7 +20,7 @@ export class YourItemsPage {
   public itemsa:Array<any>=[];
   public isKgsSelected: boolean;
 public isPiecesSelected: boolean;
-private baseURIp : string  = "http://192.168.0.8/vamsi/itrv.php";
+private baseURIp : string  = "http://localhost/vamsi/itrv.php";
 
   constructor(public navCtrl: NavController,private alertctrl:AlertController, public navParams: NavParams,public http   : HttpClient) {
     console.log('Passed params', navParams.data);
@@ -103,7 +103,7 @@ private baseURIp : string  = "http://192.168.0.8/vamsi/itrv.php";
    load1() : void
    {
       this.http
-      .get('http://192.168.0.8/vamsi/itemretrivek.php')
+      .get('http://localhost/vamsi/itemretrivek.php')
       .subscribe((data : any) =>
       {
          console.dir(data);

@@ -19,7 +19,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: 'plogin.html',
 })
 export class PloginPage {
-  private baseURI : string  = "http://192.168.0.8/vamsi/Authenti.php";
+  private baseURI : string  = "http://localhost/vamsi/Authenti.php";
   public plogin:FormGroup;
   EMAIL:any;
   
@@ -40,7 +40,6 @@ export class PloginPage {
        this.createEntry(mailid,pass);
     
 }
-
 alert(message:string){
   this.alertctrl.create({
     title: 'Alert',
@@ -86,7 +85,7 @@ Register() {
 }
 volt():void{
   this.http
-     .get('http://192.168.0.8/vamsi/Authenti.php')
+     .get('http://10.42.0.64/vamsi/Authenti.php')
      .subscribe((data : any) =>
      {
         console.log(data);

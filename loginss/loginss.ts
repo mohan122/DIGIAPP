@@ -27,14 +27,16 @@ export class LoginssPage {
   latitude:any;
   dats:any;
   records:any;
+  vamsi:any;
   
   public ionicNamedColor: string = 'primary';
   longitude:any;
-  private baseURI : string  = "http://192.168.0.8/vamsi/tesa.php";
-  private baseURIp : string  = "http://192.168.0.8/vamsi/productdis.php";
+  private baseURI : string  = "http://localhost/vamsi/tesa.php";
+  private baseURIp : string  = "http://localhost/vamsi/productdis.php";
   constructor(public navCtrl: NavController,private alertctrl:AlertController,private geolocation: Geolocation,public platform:Platform, public navParams: NavParams,public http   : HttpClient) {
     this.records=navParams.get('emails')
     console.log(this.records)
+    
   }
 
   initializeItems() {
@@ -159,9 +161,11 @@ export class LoginssPage {
     this.mapUse();
     
     console.log('ionViewDidLoad LoginssPage');
+    console.log(this.records);
   }
   mohan(){
-    this.navCtrl.push(ShopitemPage);
+    console.log(this.records);
+    this.navCtrl.push(ShopitemPage,{emails:this.records});
   }
 
 }
