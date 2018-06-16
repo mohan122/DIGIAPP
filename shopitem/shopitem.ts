@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 import {HttpHeaders,HttpClient} from '@angular/common/http';
 import { Geolocation } from '@ionic-native/geolocation';
+import { FormBuilder,FormGroup} from '@angular/forms';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 
 /**
  * Generated class for the ShopitemPage page.
@@ -21,16 +24,24 @@ export class ShopitemPage {
   public items:Array<any>=[];
   public itemsa:Array<any>=[];
   latitude:any;
+  itemExpanded:boolean=true;
+  itemExpandedHeight:number=200;
   longitude:any;
+  public hello:FormGroup;
   location:any;
 records:any;
-  constructor(public navCtrl: NavController,private geolocation: Geolocation,public platform:Platform, public navParams: NavParams, public http: HttpClient) {
+  constructor(public navCtrl: NavController,public formBuilder:FormBuilder,private geolocation: Geolocation,public platform:Platform, public navParams: NavParams, public http: HttpClient) {
     this.records=navParams.get('emails')
     console.log(this.records)
+   
+    this.hello=this.formBuilder.group({
+      category:[''],
+      
+    });
   }
-  hello(){
-    
-  }
+  
+  
+  hellos(){}
 
   createEntry(name: string) : void
   {
@@ -60,7 +71,7 @@ records:any;
     this.location=location;
     this.latitude=location.coords.latitude;
     this.longitude=location.coords.longitude;
-   
+  
       this.saveEntry();
   }).catch((error) => {
     console.log('Error getting location', error);

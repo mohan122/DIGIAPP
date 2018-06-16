@@ -19,10 +19,23 @@
                     <ion-label floating>Email/Mobile no.</ion-label>
                     <ion-input type="Email" [(ngModel)]="user.email" [formControl]="logins.controls['emails']"></ion-input>
                 </ion-item>
+
+                <ion-item no-lines *ngIf=" logins.get('emails').hasError('email')  && logins.get('emails').touched ">
+                    <div class="error" style="color: #FFA500">
+                        Please enter valid email
+                    </div>
+                </ion-item>
                 <div class="spacer" style="width: 50px; height: 2px;"></div>
                 <ion-item id="password" style="position: relative; padding:0px;">
                     <ion-label floating>Password</ion-label>
                     <ion-input type="password" [(ngModel)]="user.password" [formControl]="logins.controls['passwords']"></ion-input>
+                </ion-item>
+                <ion-item no-lines *ngIf="( logins.get('passwords').hasError('number_check') || logins.get('passwords').hasError('required') ) && logins.get('passwords').touched">
+
+                    <div class="error" style="color: #FFA500" *ngIf="logins.get('passwords').hasError('required') && logins.get('passwords').touched">
+                        Password Required
+                    </div>
+
                 </ion-item>
             </ion-list>
         </form>

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams ,Platform} from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Component ,ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
-import { FormBuilder,FormGroup} from '@angular/forms';
+import {  FormControl,Validators,FormBuilder,FormGroup,ValidatorFn,AbstractControl} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
 
@@ -34,17 +34,41 @@ export class RegisterPage {
    longitude:any;
   constructor(private fire: AngularFireAuth,  private nativeGeocoder  :  NativeGeocoder, public http: HttpClient,public formBuilder:FormBuilder,public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation,public platform:Platform) {
     this.register=this.formBuilder.group({
-      name:[''],
-      mobile:[''],
-      password:[''],
-      retypepassword:[''],
+      name:new FormControl('', [Validators.required,Validators.email]),
+      mobile:new FormControl('', [Validators.required,this.number_check()]),
+      password:new FormControl('', [Validators.required]),
+      retypepassword:new FormControl('', [Validators.required]),
       category:[''],
-      nameofshop:[''],
+      nameofshop:new FormControl('', [Validators.required]),
       latitude:[''],
       longitude:[''],
-    });
+    },{validator: this.matchingPasswords('password', 'retypepassword')});
   }
-  
+  matchingPasswords(passwordKey: string, retypepasswordKey: string) {
+    
+    return (group: FormGroup): {[key: string]: any} => {
+      let password = group.controls[passwordKey];
+      let confirmPassword = group.controls[retypepasswordKey];
+
+      if (password.value !== confirmPassword.value) {
+        return {
+          mismatchedPasswords: true
+        };
+      }
+    }
+  }
+
+  number_check(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} => {
+    var re = new RegExp("[789][0-9]{9}");
+    let input = control.value;
+    let isValid=re.test(input);
+    if(!isValid) 
+    return { 'number_check': {isValid} }
+    else 
+    return null;
+    };
+    }
   createEntry(name : string, mobile : number,password:string,retypepassword:string,nameofshop:string,category:string,latitude:number,longitude:number) : void
   {
      let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -99,16 +123,6 @@ this.nativeGeocoder.reverseGeocode(this.latitude,this.longitude)
 
   });
 });
-
-
-
-
-
-
-
-
-
-
 
    this.platform.ready().then(()=>{
     let options={timeout:3000,enableHighAccuracy:true,maximumAge:0}

@@ -6,7 +6,7 @@ import { HomePage } from '../home/home';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RegisterPage } from '../register/register';
 import { TabhPage } from '../tabh/tabh';
-import { FormBuilder,FormGroup} from '@angular/forms';
+import {  FormControl,Validators,FormBuilder,FormGroup,ValidatorFn,AbstractControl} from '@angular/forms';
 import { EmailAuthProvider_Instance } from '@firebase/auth-types';
 @IonicPage()
 @Component({
@@ -23,10 +23,26 @@ export class LoginPage {
   constructor(public navCtrl: NavController,private formBuilder:FormBuilder, public navParams: NavParams, public http: HttpClient,private fire:AngularFireAuth,private alertctrl:AlertController) {
     
     this.logins=this.formBuilder.group({   
-      emails:[''],
-      passwords:[''],
+      emails: new FormControl('', [Validators.required,Validators.email]),
+      passwords: new FormControl('', [Validators.required]),
+     // passwords:[''],
     });
   }
+
+  number_check(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} => {
+    var re = new RegExp("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/");
+    let input = control.value;
+    let isValid=re.test(input);
+    if(!isValid) 
+    return { 'number_check': {isValid} }
+    else 
+    return null;
+    };
+    }
+    
+
+
   alert(message:string){
     this.alertctrl.create({
       title: 'Alert',
