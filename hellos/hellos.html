@@ -1,0 +1,39 @@
+<!--
+  Generated template for the HellosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header  >
+
+  <ion-navbar color="tejas">
+    <ion-title style="text-transform: uppercase">{{this.recc}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content style="background-color:#272b30" >
+ 
+    <!--<ion-card *ngFor="let itemy of itemsa;let i=index" style="color:yellow;background-color:vamsi;"  (click)="same(itemy.EMAIL)">-->
+        <ion-list style="background-color:#272b30;">
+          <button  ion-item small *ngFor="let itemy of itemsa;let i=index" (click)="same(itemy.EMAIL)" style="background-color:#272b30">
+           
+              <ion-icon name="cart" item-start style="color:#FFE300;font-size:25px;"></ion-icon>
+          
+           
+              <ion-row>
+
+                <ion-col>
+           <!-- </ion-col><h2 style="color:white;font-weight: bolder;text-transform: uppercase;font-weight:bolder;font-style:normal;"></h2></ion-col>-->
+           <p style="text-transform: uppercase;color: #fff">{{itemy.EMAIL}}</p></ion-col>
+          <div [hidden]="itemy.weightb==0 && itemy.weighta==0 && itemy.weightc==0 && itemy.weightd==0 && itemy.weighte==0 && itemy.weightf==0" >
+               <span> <ion-icon name="done-all" color="#FFA500" style="color:#FFE300"></ion-icon></span>
+          </div>
+        </ion-row>
+          
+        </button>
+        </ion-list>
+       <!--</ion-card>--> 
+     
+
+
+</ion-content>

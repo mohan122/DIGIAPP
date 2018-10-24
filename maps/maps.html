@@ -44,16 +44,25 @@
     <!--
     <iframe width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=78.45454931259157%2C17.446588577020446%2C78.47849607467653%2C17.458031256252337&amp;layer=mapnik"
         style="border: 1px solid black"></iframe><br/><small><a href='https://www.openstreetmap.org/#map=16/'+location?.coords.latitude+'/'+location?.coords.longitude+'>View Larger Map</a></small>
--->
-    <ion-list no-lines style="padding-top: 220px">
+
+    <ion-list no-lines >
 
         <ion-item *ngFor="let itemy of itemsy;let i=index" style="border-bottom: 1px solid rgb(235, 150, 150);">
             <ion-icon name="locate" color="vamsi" item-start></ion-icon>
             {{itemy.SHOPNAME}}
 
         </ion-item>
-    </ion-list>
-
+        </ion-list>
+        -->
+        <div style="padding-top: 220px">
+        <ion-card *ngFor="let itemy of itemsy;let i=index">
+                <ion-item >
+                    <ion-icon name="locate" item-start large ></ion-icon>
+                    <h2> {{itemy.shopname}}</h2>
+                  </ion-item>
+                </ion-card>
+    
+            </div>
     <div padding style="padding-top:relative;">
         <button block ion-button color="vamsi" id="hello" vmedium (click)="saveEntr()">Register</button>
     </div>

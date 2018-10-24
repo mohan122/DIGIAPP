@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController ,Platform} from 'ionic-angular';
-import {AngularFireAuth} from 'angularfire2/auth';
+//import {AngularFireAuth} from 'angularfire2/auth';
 import { LoginPage } from '../login/login';
 import { FormBuilder,FormGroup} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -46,7 +46,7 @@ longitude:any;
   
   
 
-  constructor(public navCtrl: NavController,private geolocation: Geolocation,public platform:Platform,private formBuilder:FormBuilder, public http: HttpClient,public navParams: NavParams,private fire:AngularFireAuth,private toast:ToastController) {
+  constructor(public navCtrl: NavController,private geolocation: Geolocation,public platform:Platform,private formBuilder:FormBuilder, public http: HttpClient,public navParams: NavParams,private toast:ToastController) {
 
     this.isbuttonselecteda=false;
     this.isbuttonselectedb=false;
@@ -286,7 +286,7 @@ opense(){
    
     this.isKgsSelected = false;
     this.isPiecesSelected = false;
-    this.fire.authState.subscribe(user=>{
+   /* this.fire.authState.subscribe(user=>{
       if(user && user.email && user.uid){
       this.toast.create({
          message:'Successfully logged into Digimart',
@@ -299,7 +299,7 @@ opense(){
         duration:3000
      }).present();
   }
-  })
+  })*/
 
 }
 }

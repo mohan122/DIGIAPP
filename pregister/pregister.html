@@ -15,8 +15,15 @@
 
 
 <ion-content padding>
-
+    
+        <div class="image" style="display:flex; justify-content: center;text-align: center;">
+                <img src="{{base64Image}}"> 
+        </div>
+    
     <form [formGroup]="pregister">
+            <div padding>
+                    <button block outline ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="takePicture()">TAKE PICTURE</button>
+            </div>
         <ion-list>
             <ion-item id="password" style="padding:0px;">
                 <ion-label floating>EMAIL</ion-label>

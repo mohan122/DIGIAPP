@@ -6,4 +6,20 @@ page-register {
         background: color($colors, white);
         width: 95%;
     }
+    .image {
+        height: 30vw; 
+        width:30vw; 
+       border: 1px solid rgb(265, 165, 0);
+       border-radius: 50%;
+       box-shadow: 10px 5px 5px rgb(265, 165, 0);
+       display: block;
+       display: block;
+       margin: auto;
+   }
+   .circle-pic{
+    width:50px;
+    height:50px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
 }

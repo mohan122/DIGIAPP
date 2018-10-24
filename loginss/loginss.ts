@@ -31,10 +31,10 @@ export class LoginssPage {
   
   public ionicNamedColor: string = 'primary';
   longitude:any;
-  private baseURI : string  = "http://localhost/vamsi/tesa.php";
-  private baseURIp : string  = "http://localhost/vamsi/productdis.php";
+  private baseURI : string  = "http://10.45.24.44/vamsi/tesa.php";
+  private baseURIp : string  = "http://10.45.24.44/vamsi/productdis.php";
   constructor(public navCtrl: NavController,private alertctrl:AlertController,private geolocation: Geolocation,public platform:Platform, public navParams: NavParams,public http   : HttpClient) {
-    this.records=navParams.get('emails')
+    this.records=navParams.get('emails');
     console.log(this.records)
     
   }

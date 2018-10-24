@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angul
 import { FormBuilder,FormGroup} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PloginPage } from '../plogin/plogin';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
 /**
@@ -20,8 +21,9 @@ import { PloginPage } from '../plogin/plogin';
 export class PregisterPage {
  
   public pregister:FormGroup;
+  base64Image:any;
   private baseURI : string  = "http://localhost/vamsi/pregister.php";
-  constructor(public navCtrl: NavController,private alertctrl:AlertController,public formBuilder:FormBuilder,public http: HttpClient, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,private camera: Camera,private alertctrl:AlertController,public formBuilder:FormBuilder,public http: HttpClient, public navParams: NavParams) {
     this.pregister=this.formBuilder.group({ 
       name:[''],
       mobile:[''],
@@ -75,6 +77,24 @@ export class PregisterPage {
       subTitle: message,
       buttons: ['OK']
     }).present();
+  }
+  takePicture(){
+    let options:CameraOptions =
+    {
+    destinationType: this.camera.DestinationType.FILE_URI,
+  encodingType: this.camera.EncodingType.JPEG,
+  mediaType: this.camera.MediaType.PICTURE,
+      quality: 100,
+      saveToPhotoAlbum: true,
+      correctOrientation: true
+    };
+    this.camera.getPicture(options)
+    .then((data) => {
+      this.base64Image = data;
+      alert(this.base64Image);
+    }, function(error) {
+      console.log(error);
+    });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PregisterPage');

@@ -5,6 +5,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { FormBuilder,FormGroup} from '@angular/forms';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+import {ItembuyPage} from '../itembuy/itembuy';
+
 
 /**
  * Generated class for the ShopitemPage page.
@@ -24,6 +26,9 @@ export class ShopitemPage {
   public items:Array<any>=[];
   public itemsa:Array<any>=[];
   latitude:any;
+  public isbuttonselectede:boolean;
+  public isbuttonselectedf:boolean;
+  public isbuttonselectedg:boolean;
   itemExpanded:boolean=true;
   itemExpandedHeight:number=200;
   longitude:any;
@@ -38,11 +43,28 @@ records:any;
       category:[''],
       
     });
+    this.isbuttonselectede=false;
+    this.isbuttonselectedf=true;
+    this.isbuttonselectedg=false;
   }
   
   
-  hellos(){}
-
+  hellos(vamsi:any,shpname:any,zmail:any){
+    console.log(vamsi);
+    console.log(shpname);
+    console.log(zmail);
+    this.navCtrl.push(ItembuyPage,{mailid:zmail,Item:vamsi,pmailid:this.records});
+  }
+   Logout(){
+    this.isbuttonselectede=true;
+    this.isbuttonselectedf=false;
+    this.isbuttonselectedg=true;
+   }
+   Login(){
+    this.isbuttonselectede=false;
+    this.isbuttonselectedf=true;
+    this.isbuttonselectedg=false;
+   }
   createEntry(name: string) : void
   {
      let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -107,7 +129,9 @@ records:any;
           
        });
     }
-
+   passing(item):void{
+      this.navCtrl.push('HellosPage',item);
+   }
   ionViewDidLoad() {
     console.log(this.records);
     let name:string=this.records;

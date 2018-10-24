@@ -1,11 +1,14 @@
-import { Map } from 'rxjs/util/Map';
+//import { Map } from 'rxjs/util/Map';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { PregisterPage } from '../pregister/pregister'; 
 import { MapsPage} from '../maps/maps';
+
 import { FormBuilder,FormGroup} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { BookshopPage } from '../bookshop/bookshop';
+import { LoginssPage} from '../loginss/loginss';
+import {PtabsPage} from '../ptabs/ptabs';
 /**
  * Generated class for the PloginPage page.
  *
@@ -19,7 +22,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: 'plogin.html',
 })
 export class PloginPage {
-  private baseURI : string  = "http://localhost/vamsi/Authenti.php";
+  private baseURI : string  = "http://10.45.24.44/vamsi/Authenti.php";
   public plogin:FormGroup;
   EMAIL:any;
   
@@ -64,12 +67,16 @@ this.http.post(url, JSON.stringify(options), headers)
   
  if(data[0].PASSWORD==this.plogin.controls["word"].value && data[0].PASSWORD!="")
  {
-   this.navCtrl.setRoot(MapsPage,{emails:mailid});
-   
+   this.navCtrl.setRoot(PtabsPage,{emails:mailid});
+  //this.navCtrl.setRoot(BookshopPage,{emails:mailid});
+  //this.navCtrl.setRoot(LoginssPage,{emails:mailid});
+   //this.navCtrl.push(PtabsPage,{emails:mailid});
  }
+
  else
  {
   this.alert('EMAIL OR PASSWORD IS INCORRECT');
+ // this.navCtrl.setRoot(MapsPage,{emails:mailid});
  }
  
  //console.log(data);
@@ -85,7 +92,7 @@ Register() {
 }
 volt():void{
   this.http
-     .get('http://10.42.0.64/vamsi/Authenti.php')
+     .get('http://localhost/vamsi/Authenti.php')
      .subscribe((data : any) =>
      {
         console.log(data);

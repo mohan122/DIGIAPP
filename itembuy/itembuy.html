@@ -1,0 +1,286 @@
+<!--
+  Generated template for the ItembuyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header color="vamsi">
+
+  <ion-navbar color="vamsi">
+    <ion-title style="text-transform:uppercase">{{this.recc}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="card-background-page">
+  <div *ngFor="let itemy of itemsa;let i=index">
+  <div *ngIf="itemy.EMAIL==this.recc">
+      <ion-item style="padding:0px;position: relative;" >
+    <ion-label style="color:rgb(15, 19, 4);font-weight:bold;">Select Weight</ion-label>
+    <ion-select [(ngModel)]="password">
+        <div [hidden]="itemy.weighta==0">
+        <ion-option value="{{itemy.weighta}}" [disabled]="itemy.weighta==0">{{itemy.weighta}}</ion-option>
+      </div>
+      <div [hidden]="true">
+        <ion-option value="{{itemy.weightb}}" [disabled]="itemy.weightb==0">{{itemy.weightb}}</ion-option>
+      </div>
+        <div [hidden]="itemy.weightc==0 ">
+        <ion-option value="{{itemy.weightc}}" [disabled]="itemy.weightc==0">{{itemy.weightc}}</ion-option>
+      </div>
+        <div [hidden]="itemy.weightd==0 ">
+        <ion-option value="{{itemy.weightd}}" [disabled]="itemy.weightd==0">{{itemy.weightd}}</ion-option>
+      </div>
+        <div [hidden]="itemy.weighte==0 ">
+        <ion-option value="{{itemy.weighte}}" [disabled]="itemy.weighte==0">{{itemy.weighte}}</ion-option>
+      </div>
+        <div [hidden]="itemy.weightf==0 ">
+        <ion-option value="{{itemy.weightf}}" [disabled]="itemy.weightf==0">{{itemy.weightf}}</ion-option>
+      </div>
+    </ion-select>
+  </ion-item>
+  
+    <div *ngIf="itemy.weighta==password">
+        <ion-row >
+        <ion-col col-md-4>
+    <ion-card>
+    <ion-item style="background-color:rgb(218, 146, 40)">
+      <ion-icon name="pricetags" large style="color:white;font-size:25px;padding-left:45px;text-align:center;padding-top: 20px;"></ion-icon>
+    <p  style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.costa}}</p>
+  </ion-item>
+  </ion-card>
+  </ion-col>
+  <ion-col col-md-4>
+  <ion-card>
+      <ion-item style="background-color:blue;box-shadow: rgb(86, 168, 31)">
+      <ion-icon name="basket" large style="color:white;font-size:25px;padding-left:45px;text-align:center;padding-top: 20px;"></ion-icon>
+      <p style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.piecesa}}</p>
+    </ion-item>
+    </ion-card>
+  </ion-col>
+</ion-row>
+<ion-list>
+    <ion-list-header style="background-color:rgb(96, 77, 204)">
+      <p style="color:white;font-weight:bold;">SELECT QUANTITY</p>
+      <ion-badge item-end style="background-color:orangered;">{{You}}</ion-badge>
+    </ion-list-header>
+    <ion-item>
+        <ion-range max={{itemy.piecesa}} snaps=true [(ngModel)]="You" style="color:orange">
+            <ion-badge range-left >0</ion-badge>
+            <ion-badge range-right >{{itemy.piecesa}}</ion-badge>
+           </ion-range>
+    </ion-item>
+    
+  </ion-list>
+ <div padding>
+    <button block outline ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="caluclate(You,itemy.costa,itemy.weighta)">CALUCLATE</button>
+</div>
+
+
+  </div>
+  <div *ngIf="itemy.weightb==password">
+      <ion-row >
+        <ion-col col-md-4>
+      <ion-card>
+        <ion-item style="background-color:rgb(218, 146, 40)">
+          <ion-icon name="pricetags" large style="color:white;font-size:25px;padding-left:45px;text-align:center;padding-top: 20px;"></ion-icon>
+        <p style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.costb}}</p>
+      </ion-item>
+        </ion-card>
+        </ion-col>
+        <ion-col col-md-4>
+        <ion-card >
+          <ion-item style="background-color:blue">
+            <ion-icon name="basket" large style="color:white;font-size:25px;padding-left:45px;text-align:center;padding-top: 20px;"></ion-icon>
+            <p style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.piecesb}}</p>
+          </ion-item>
+          </ion-card>
+        </ion-col>
+        </ion-row>
+        
+        <ion-list>
+            <ion-list-header style="background-color:rgb(196, 196, 196)">
+                <p style="color:white;font-weight:bold;">SELECT QUANTITY</p>
+              <ion-badge item-end>{{You}}</ion-badge>
+            </ion-list-header>
+            <ion-item>
+                <ion-range max={{itemy.piecesb}} snaps=true [(ngModel)]="You">
+                    <ion-label range-left>0</ion-label>
+                    <ion-label range-right>{{itemy.piecesb}}</ion-label>
+                   </ion-range>
+            </ion-item>
+          </ion-list>
+         <div padding>
+            <button block outline ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="caluclate(You,itemy.costb,itemy.weightb)">CALUCLATE</button>
+        </div>
+
+
+      
+  </div>
+   <div *ngIf="itemy.weightc==password">
+      <ion-row >
+          <ion-col col-md-4>
+      <ion-card>
+        <ion-item style="background-color:rgb(218, 146, 40)">
+          <ion-icon name="pricetags" large style="color:white;font-size:25px;padding-left:45px;text-align:center;padding-top: 20px;"></ion-icon>
+        <p style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.costc}}</p>
+      </ion-item>
+        </ion-card>
+        </ion-col>
+        <ion-col col-md-4>
+        <ion-card>
+          <ion-item style="background-color:blue">
+            <ion-icon name="basket" large style="color:white;font-size:25px;padding-left:45px;text-align:center;padding-top: 20px;"></ion-icon>
+            <p style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.piecesc}}</p>
+          </ion-item>
+          </ion-card>
+        </ion-col>
+        </ion-row>
+        
+   
+        <ion-list>
+            <ion-list-header style="background-color:rgb(196, 196, 196)">
+                <p style="color:white;font-weight:bold;">SELECT QUANTITY</p>
+              <ion-badge item-end>{{You}}</ion-badge>
+            </ion-list-header>
+            <ion-item>
+                <ion-range max={{itemy.piecesc}} snaps=true [(ngModel)]="You">
+                    <ion-label range-left>0</ion-label>
+                    <ion-label range-right>{{itemy.piecesc}}</ion-label>
+                   </ion-range>
+            </ion-item>
+          </ion-list>
+         <div padding>
+            <button block outline ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="caluclate(You,itemy.costc,itemy.weightc)">CALUCLATE</button>
+        </div>
+
+
+
+
+   </div>
+   <div *ngIf="itemy.weightd==password">
+      <ion-row >
+          <ion-col col-md-4>
+      <ion-card>
+        <ion-item style="background-color:rgb(218, 146, 40)">
+          <ion-icon name="pricetags" large style="color:white;font-size:25px;padding-left:45px;text-align:center;padding-top: 20px;"></ion-icon>
+        <p style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.costd}}</p>
+      </ion-item>
+        </ion-card>
+        </ion-col>
+        <ion-col col-md-4>
+        <ion-card>
+          <ion-item style="background-color:blue">
+            <ion-icon name="basket" large style="color:white;font-size:25px;padding-left:45px;text-align:center;padding-top: 20px;"></ion-icon>
+            <p style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.piecesd}}</p>
+          </ion-item>
+          </ion-card>
+        </ion-col>
+        </ion-row>
+        
+        <ion-list>
+            <ion-list-header style="background-color:rgb(196, 196, 196)">
+                <p style="color:white;font-weight:bold;">SELECT QUANTITY</p>
+              <ion-badge item-end>{{You}}</ion-badge>
+            </ion-list-header>
+            <ion-item>
+                <ion-range max={{itemy.piecesd}} snaps=true [(ngModel)]="You">
+                    <ion-label range-left>0</ion-label>
+                    <ion-label range-right>{{itemy.piecesd}}</ion-label>
+                   </ion-range>
+            </ion-item>
+          </ion-list>
+         <div padding>
+            <button block outline ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="caluclate(You,itemy.costd,itemy.weightd)">CALUCLATE</button>
+        </div>
+
+
+   </div>
+   <div *ngIf="itemy.weighte==password">
+      <ion-row >
+          <ion-col col-md-4>
+      <ion-card>
+        <ion-item style="background-color:rgb(218, 146, 40)">
+          <ion-icon name="pricetags" large style="color:white;font-size:25px;padding-left:45px;text-align:center;padding-top: 20px;"></ion-icon>
+        <p style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.coste}}</p>
+      </ion-item>
+        </ion-card>
+        </ion-col>
+        <ion-col col-md-4>
+        <ion-card>
+          <ion-item style="background-color:blue">
+            <ion-icon name="basket" large style="color:white;font-size:25px;padding-left:45px;text-align:center;padding-top: 20px;"></ion-icon>
+            <p style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.piecese}}</p>
+          </ion-item>
+          </ion-card>
+          
+        </ion-col>
+        </ion-row>
+        <ion-list>
+            <ion-list-header style="background-color:rgb(196, 196, 196)">
+                <p style="color:white;font-weight:bold;">SELECT QUANTITY</p>
+              <ion-badge item-end>{{You}}</ion-badge>
+            </ion-list-header>
+            <ion-item>
+                <ion-range max={{itemy.piecese}} snaps=true [(ngModel)]="You">
+                    <ion-label range-left>0</ion-label>
+                    <ion-label range-right>{{itemy.piecese}}</ion-label>
+                   </ion-range>
+            </ion-item>
+          </ion-list>
+         <div padding>
+            <button block outline ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="caluclate(You,itemy.coste,itemy.weighte)">CALUCLATE</button>
+        </div>
+
+
+  </div>
+   <div *ngIf="itemy.weightf==password">
+      <ion-row >
+          <ion-col col-md-4>
+      <ion-card>
+        <ion-item style="background-color:rgb(218, 146, 40)">
+          <ion-icon name="pricetags" large style="color:white;font-size:25px;text-align:center;padding-left:45px;padding-top: 20px;"></ion-icon>
+        <p style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.costf}}</p>
+      </ion-item>    
+        </ion-card>
+        
+        </ion-col>
+        <ion-col col-md-4>
+        <ion-card>
+          <ion-item style="background-color:blue;box-shadow: black;">
+            <ion-icon name="basket" large style="color:white;font-size:25px;padding-left:45px;text-align:center;padding-top: 20px;"></ion-icon>
+            <p style="font-weight:bolder;color: white;font-style:normal;text-align: center; font-size: 35px;padding-bottom: 20px;">{{itemy.piecesf}}</p>
+          </ion-item>
+          </ion-card>
+         
+          </ion-col>
+          </ion-row>
+          <ion-list>
+              <ion-list-header style="background-color:rgb(196, 196, 196)">
+                  <p style="color:white;font-weight:bold;">SELECT QUANTITY</p>
+                <ion-badge item-end>{{You}}</ion-badge>
+              </ion-list-header>
+              <ion-item>
+                  <ion-range max={{itemy.piecesf}} snaps=true [(ngModel)]="You">
+                      <ion-label range-left>0</ion-label>
+                      <ion-label range-right>{{itemy.piecesf}}</ion-label>
+                     </ion-range>
+              </ion-item>
+            </ion-list>
+           <div padding>
+              <button block outline ion-button color="vamsi" style="padding:0px; width: 100%;" medium (click)="caluclate(You,itemy.costf,itemy.weightf)">CALUCLATE</button>
+          </div>
+  
+  
+    </div>
+
+</div>
+ 
+</div>
+<div padding *ngIf="isbuttonSelected">
+  <button ion-button block (click)="navi()">ADD MORE ITEMS...</button>
+   </div>
+   <div padding *ngIf="isbuttonSelected">
+    <button ion-button block (click)="navis()">DONE</button>
+     </div>
+</ion-content>

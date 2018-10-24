@@ -1,4 +1,4 @@
-page-maps {
+page-ptabs {
     #password {
         background: color($colors, white);
         width: 95%;
@@ -21,7 +21,5 @@ page-maps {
     map {
         height: 400px;
     }
-    agm-map{
-        height: 300px !important;
-    }
+   
 }

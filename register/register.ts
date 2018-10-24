@@ -1,12 +1,12 @@
 
 import { IonicPage, NavController, NavParams ,Platform} from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
+//import { AngularFireAuth } from 'angularfire2/auth';
 import { Component ,ViewChild } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import {  FormControl,Validators,FormBuilder,FormGroup,ValidatorFn,AbstractControl} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderForwardResult } from '@ionic-native/native-geocoder';
-
+import { NativeGeocoder, NativeGeocoderReverseResult,NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 
 
@@ -31,8 +31,10 @@ export class RegisterPage {
    private baseURI : string  = "http://localhost/vamsi/register.php";
    latitude:any;
    Promise:PromiseConstructor;
+   geocoder:any;
    longitude:any;
-  constructor(private fire: AngularFireAuth,  private nativeGeocoder  :  NativeGeocoder, public http: HttpClient,public formBuilder:FormBuilder,public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation,public platform:Platform) {
+   base64Image:any;
+  constructor(private camera: Camera, private _GEOCODE  :  NativeGeocoder, public http: HttpClient,public formBuilder:FormBuilder,public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation,public platform:Platform) {
     this.register=this.formBuilder.group({
       name:new FormControl('', [Validators.required,Validators.email]),
       mobile:new FormControl('', [Validators.required,this.number_check()]),
@@ -57,10 +59,27 @@ export class RegisterPage {
       }
     }
   }
-
+  takePicture(){
+    let options:CameraOptions =
+    {
+    destinationType: this.camera.DestinationType.FILE_URI,
+  encodingType: this.camera.EncodingType.JPEG,
+  mediaType: this.camera.MediaType.PICTURE,
+      quality: 100,
+      saveToPhotoAlbum: true,
+      correctOrientation: true
+    };
+    this.camera.getPicture(options)
+    .then((data) => {
+      this.base64Image = data;
+      alert(this.base64Image);
+    }, function(error) {
+      console.log(error);
+    });
+  }
   number_check(): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} => {
-    var re = new RegExp("[789][0-9]{9}");
+    var re = new RegExp("^(\\d+)$");
     let input = control.value;
     let isValid=re.test(input);
     if(!isValid) 
@@ -104,7 +123,7 @@ export class RegisterPage {
 
  
   async registerUser() {
-    const result=this.fire.auth.createUserWithEmailAndPassword(this.user.value,this.password.value)
+   /* const result=this.fire.auth.createUserWithEmailAndPassword(this.user.value,this.password.value)
     .then(result=> {
      console.log('got data',result);
 }
@@ -112,17 +131,11 @@ export class RegisterPage {
  .catch(error=>{
      console.log('got error',error);
 });
-this.platform.ready().then(()=>{
-this.nativeGeocoder.reverseGeocode(this.latitude,this.longitude)
-  .then((result: NativeGeocoderReverseResult) => {
-    console.log(JSON.stringify(result));
-     let str : string   = `The reverseGeocode address is  ${result.countryCode}`;
-  })
-  .catch((error: any) =>{
-    console.log(error);
 
-  });
-});
+let options: NativeGeocoderOptions = {
+  useLocale: true,
+  maxResults: 5
+};*/
 
    this.platform.ready().then(()=>{
     let options={timeout:3000,enableHighAccuracy:true,maximumAge:0}
@@ -131,13 +144,43 @@ this.geolocation.getCurrentPosition(options).then((location) => {
   this.location=location;
   this.latitude=location.coords.latitude;
   this.longitude=location.coords.longitude;
+  this.reverseGeocode(location.coords.latitude,location.coords.longitude);
 }).catch((error) => {
   console.log('Error getting location', error);
 });
 });
 
-}
+
+/*this.nativeGeocoder.reverseGeocode(this.latitude, this.longitude, options)
+.then((result: NativeGeocoderReverseResult[]) => alert(JSON.stringify(result)))
+.catch((error: any) => alert(error));
+
+*/
+  }
+  reverseGeocode(lat: number,lng : number) : Promise<any>
+   {
+      return new Promise((resolve, reject) =>
+      {
+         this._GEOCODE.reverseGeocode(lat, lng)
+         .then((result :NativeGeocoderReverseResult[]) =>
+         {
+            let str : string   = `The reverseGeocode address is in ${result}`;
+            alert(str);
+         })
+         .catch((error: any) =>
+         {
+            console.log(error);
+            reject(error);
+         });
+      });
+   }
+  
+
+
 ionViewDidLoad() {
   console.log('ionViewDidLoad RegisterPage');
 }
 }
+
+
+
